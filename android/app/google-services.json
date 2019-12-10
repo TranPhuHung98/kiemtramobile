@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "916529544460",
+    "firebase_url": "https://stdiohihi.firebaseio.com",
+    "project_id": "stdiohihi",
+    "storage_bucket": "stdiohihi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916529544460:android:40e44e6e29e352d9",
+        "android_client_info": {
+          "package_name": "com.example.stdio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916529544460-tt41uh719qf67gord7lk1gm1mm4st4l4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stdio",
+            "certificate_hash": "c7da1400b1f102651d18b49036317c2ddd1860a0"
+          }
+        },
+        {
+          "client_id": "916529544460-78iigd77qenh3v98kh239m86bhvogabi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSdpDweVwOUNGd_8LkJZB-5V1PbxdmHHQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916529544460-78iigd77qenh3v98kh239m86bhvogabi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
