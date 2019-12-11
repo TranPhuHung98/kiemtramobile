@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stdio/chat/users_screen.dart';
 import 'package:stdio/company/home_screen.dart';
 import 'package:stdio/home/home_company_screen.dart';
-import 'package:stdio/ticket/group_screen.dart';
+import 'package:stdio/group/group_screen.dart';
 
 class SettingGrpScreen extends StatefulWidget {
   String companyId;

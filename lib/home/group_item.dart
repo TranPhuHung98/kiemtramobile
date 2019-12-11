@@ -6,7 +6,7 @@ import 'package:stdio/change_email.dart';
 import 'package:stdio/chat/chat_screen.dart';
 import 'package:stdio/company/home_screen.dart';
 import 'package:stdio/home/list_user_in_group.dart';
-import 'package:stdio/ticket/group_screen.dart';
+import 'package:stdio/group/group_screen.dart';
 
 class GroupItem extends StatefulWidget {
   String companyId;
@@ -188,19 +188,19 @@ class _GroupItemState extends State<GroupItem> {
               ),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => 
-                  // GroupScreen(
-                  //       companyId: widget.companyId,
-                  //       groupId: widget.groupId,
-                  //       groupName: widget.groupName,
-                  //       user: widget.user,
-                  //       groupAvatar: widget.avatar,
-                  //     )
-                  ChatScreen(
+                  GroupScreen(
                         companyId: widget.companyId,
+                        groupId: widget.groupId,
                         groupName: widget.groupName,
                         user: widget.user,
-                        groupId: widget.groupId,
+                        groupAvatar: widget.avatar,
                       )
+                  // ChatScreen(
+                  //       companyId: widget.companyId,
+                  //       groupName: widget.groupName,
+                  //       user: widget.user,
+                  //       groupId: widget.groupId,
+                  //     )
                       )),
               trailing: (newComment || newMessage)
                   ? Icon(

@@ -7,8 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stdio/change_email.dart';
-import 'package:stdio/ticket/comment_onpress.dart';
-import 'package:stdio/ticket/list_comment.dart';
+import 'package:stdio/group/comment_onpress.dart';
+import 'package:stdio/group/list_comment.dart';
 
 class CommentPostScreen extends StatefulWidget {
   String groupName;

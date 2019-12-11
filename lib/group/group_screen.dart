@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:stdio/change_email.dart';
 import 'package:stdio/chat/chat_screen.dart';
 import 'package:stdio/edit_group_screen.dart';
-import 'package:stdio/ticket/post_model.dart';
-import 'package:stdio/ticket/post_status.dart';
+import 'package:stdio/group/post_model.dart';
+import 'package:stdio/group/post_status.dart';
 
 class GroupScreen extends StatefulWidget {
   String companyId;
@@ -80,16 +80,16 @@ class GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // seenMessage().then((_) {
-    //   if (timeLastMessage.compareTo(timeSeenMessage) > 0)
-    //     setState(() {
-    //       newMessage = true;
-    //     });
-    //   else
-    //     setState(() {
-    //       newMessage = false;
-    //     });
-    // });
+    seenMessage().then((_) {
+      if (timeLastMessage.compareTo(timeSeenMessage) > 0)
+        setState(() {
+          newMessage = true;
+        });
+      else
+        setState(() {
+          newMessage = false;
+        });
+    });
     var listPost = FirebaseDatabase.instance
         .reference()
         .child("Company")
@@ -104,6 +104,41 @@ class GroupScreenState extends State<GroupScreen> {
             ? Text('${widget.groupName}')
             : Text('${widget.groupName.substring(0, 14)}...'),
         backgroundColor: Colors.blue,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.chat),
+            color: newMessage ? Colors.red : Colors.white,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => 
+                  ChatScreen(
+                        companyId: widget.companyId,
+                        groupName: widget.groupName,
+                        user: widget.user,
+                        groupId: widget.groupId,
+                      )
+                  // GroupScreen(
+                  //       companyId: widget.companyId,
+                  //       groupId: widget.groupId,
+                  //       groupName: widget.groupName,
+                  //       user: widget.user,
+                  //       groupAvatar: widget.groupAvatar,
+                  //     )
+                      ));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => SettingGrpScreen(
+                      user: widget.user,
+                      companyId: widget.companyId,
+                      grpName: widget.groupName,
+                      grpAvatar: widget.groupAvatar,
+                      grpId: widget.groupId,
+                    ))),
+          ),
+        ],
       ),
       body: Container(
         color: Colors.grey[200],

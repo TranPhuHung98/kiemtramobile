@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stdio/change_email.dart';
-import 'package:stdio/ticket/post_onpress.dart';
+import 'package:stdio/group/post_onpress.dart';
 
 class PostStatus extends StatefulWidget {
   String groupId;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:stdio/change_email.dart';
 import 'package:stdio/model/comment.dart';
-import 'package:stdio/ticket/post_detail.dart';
+import 'package:stdio/group/post_detail.dart';
 
 class PostModel extends StatefulWidget {
   DataSnapshot dataSnaphot;
