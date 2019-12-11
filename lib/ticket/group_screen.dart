@@ -80,16 +80,16 @@ class GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    seenMessage().then((_) {
-      if (timeLastMessage.compareTo(timeSeenMessage) > 0)
-        setState(() {
-          newMessage = true;
-        });
-      else
-        setState(() {
-          newMessage = false;
-        });
-    });
+    // seenMessage().then((_) {
+    //   if (timeLastMessage.compareTo(timeSeenMessage) > 0)
+    //     setState(() {
+    //       newMessage = true;
+    //     });
+    //   else
+    //     setState(() {
+    //       newMessage = false;
+    //     });
+    // });
     var listPost = FirebaseDatabase.instance
         .reference()
         .child("Company")
@@ -104,38 +104,14 @@ class GroupScreenState extends State<GroupScreen> {
             ? Text('${widget.groupName}')
             : Text('${widget.groupName.substring(0, 14)}...'),
         backgroundColor: Colors.blue,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.chat),
-            color: newMessage ? Colors.red : Colors.white,
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ChatScreen(
-                        companyId: widget.companyId,
-                        groupName: widget.groupName,
-                        user: widget.user,
-                        groupId: widget.groupId,
-                      )));
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => SettingGrpScreen(
-                      user: widget.user,
-                      companyId: widget.companyId,
-                      grpName: widget.groupName,
-                      grpAvatar: widget.groupAvatar,
-                      grpId: widget.groupId,
-                    ))),
-          ),
-        ],
       ),
       body: Container(
         color: Colors.grey[200],
         child: Column(
           children: <Widget>[
-            SizedBox(height: 2.0,),
+            SizedBox(
+              height: 2.0,
+            ),
             Expanded(
               flex: 9,
               child: new FirebaseAnimatedList(

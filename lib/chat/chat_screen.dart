@@ -11,14 +11,18 @@ import 'package:stdio/chat/list_message.dart';
 import 'package:stdio/chat/send_mess.dart';
 import 'package:stdio/chat/users_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stdio/ticket/group_screen.dart';
+
+import '../edit_group_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   String companyId;
   String groupName;
   String groupId;
+  String groupAvatar;
   FirebaseUser user;
   SendMessage sendMess = SendMessage();
-  ChatScreen({Key key, this.groupName, this.user, this.groupId, this.companyId})
+  ChatScreen({Key key, this.groupName, this.user, this.groupId, this.companyId,this.groupAvatar})
       : super(key: key);
 
   @override
@@ -33,6 +37,9 @@ class ChatScreenState extends State<ChatScreen> {
   File imageFile;
   String imageUrl;
   bool isLoading = false;
+  String timeSeenMessage, timeLastMessage;
+  bool newMessage = false;
+
   Future getImage() async {
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -61,6 +68,23 @@ class ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  Future seenMessage() async {
+    await FirebaseDatabase.instance
+        .reference()
+        .child(
+            'Users/${changeEmail.changeEmail(widget.user.email)}/JoinedCompany/${widget.companyId}/JoinedGroup/${widget.groupId}')
+        .once()
+        .then((onValue) {
+      timeSeenMessage = onValue.value['timeSeenMessage'] ?? '0';
+    });
+    await FirebaseDatabase.instance
+        .reference()
+        .child('Company/${widget.companyId}/Group/${widget.groupId}')
+        .once()
+        .then((onValue) =>
+            timeLastMessage = onValue.value['timeLastMessage'] ?? '0');
+  }
+
   ChangeEmail changeEmail =ChangeEmail();
   @override
   void dispose() {
@@ -74,6 +98,16 @@ class ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    seenMessage().then((_) {
+      if (timeLastMessage.compareTo(timeSeenMessage) > 0)
+        setState(() {
+          newMessage = true;
+        });
+      else
+        setState(() {
+          newMessage = false;
+        });
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.groupName),
@@ -90,6 +124,39 @@ class ChatScreenState extends State<ChatScreen> {
           //             groupName: widget.groupName)));
           //   },
           // )
+          IconButton(
+            icon: Icon(Icons.chat),
+            color: newMessage ? Colors.red : Colors.white,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => 
+                  // ChatScreen(
+                  //       companyId: widget.companyId,
+                  //       groupName: widget.groupName,
+                  //       user: widget.user,
+                  //       groupId: widget.groupId,
+                  //     )
+                  GroupScreen(
+                        companyId: widget.companyId,
+                        groupId: widget.groupId,
+                        groupName: widget.groupName,
+                        user: widget.user,
+                        groupAvatar: widget.groupAvatar,
+                      )
+                      ));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => SettingGrpScreen(
+                      user: widget.user,
+                      companyId: widget.companyId,
+                      grpName: widget.groupName,
+                      grpAvatar: widget.groupAvatar,
+                      grpId: widget.groupId,
+                    ))),
+          ),
         ],
       ),
       body: new Container(

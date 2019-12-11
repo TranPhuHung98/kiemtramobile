@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:stdio/change_email.dart';
+import 'package:stdio/chat/chat_screen.dart';
 import 'package:stdio/company/home_screen.dart';
 import 'package:stdio/home/list_user_in_group.dart';
 import 'package:stdio/ticket/group_screen.dart';
@@ -186,13 +187,21 @@ class _GroupItemState extends State<GroupItem> {
                 style: TextStyle(color: Colors.blue),
               ),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => GroupScreen(
+                  builder: (_) => 
+                  // GroupScreen(
+                  //       companyId: widget.companyId,
+                  //       groupId: widget.groupId,
+                  //       groupName: widget.groupName,
+                  //       user: widget.user,
+                  //       groupAvatar: widget.avatar,
+                  //     )
+                  ChatScreen(
                         companyId: widget.companyId,
-                        groupId: widget.groupId,
                         groupName: widget.groupName,
                         user: widget.user,
-                        groupAvatar: widget.avatar,
-                      ))),
+                        groupId: widget.groupId,
+                      )
+                      )),
               trailing: (newComment || newMessage)
                   ? Icon(
                       Icons.error_outline,
